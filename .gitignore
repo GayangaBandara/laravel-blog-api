@@ -1,0 +1,40 @@
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files (IMPORTANT)
+.env
+.env.backup
+.env.production
+
+# IDE / Editor
+/.vscode
+/.idea
+/.fleet
+/.zed
+
+# Laravel specific
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+
+# Cache / temp
+.phpunit.result.cache
+/.phpunit.cache
+
+# Auth / configs
+auth.json
+
+# Helper files
+_ide_helper.php
+
+# Laravel Homestead
+Homestead.json
+Homestead.yaml
