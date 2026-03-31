@@ -34,7 +34,32 @@ auth.json
 
 # Helper files
 _ide_helper.php
+_ide_helper_models.php
 
 # Laravel Homestead
 Homestead.json
 Homestead.yaml
+
+# Composer lock file (optional - comment out if you want to track versions)
+# composer.lock
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# PHPStorm
+.idea/
+
+# VSCode
+.vscode/settings.json
+.vscode/launch.json
+
+# Mac OS
+.AppleDouble
+.AppleDB
