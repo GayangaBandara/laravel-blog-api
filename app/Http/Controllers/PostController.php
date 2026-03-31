@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    // GET /api/posts
+    // GET all posts
     public function index()
     {
-        return Post::all();
+        return response()->json([
+            'status' => true,
+            'message' => 'Posts retrieved successfully',
+            'data' => Post::latest()->get()
+        ]);
     }
 
-    // POST /api/posts
+    // CREATE post
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -30,16 +34,36 @@ class PostController extends Controller
         ], 201);
     }
 
-    // GET /api/posts/{id}
+    // GET single post
     public function show($id)
     {
-        return Post::findOrFail($id);
+        $post = Post::find($id);
+
+        if (!$post) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Post not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Post retrieved successfully',
+            'data' => $post
+        ]);
     }
 
-    // PUT /api/posts/{id}
+    // UPDATE post
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::find($id);
+
+        if (!$post) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Post not found'
+            ], 404);
+        }
 
         $validated = $request->validate([
             'title' => 'sometimes|required|string|max:255',
@@ -55,10 +79,19 @@ class PostController extends Controller
         ]);
     }
 
-    // DELETE /api/posts/{id}
+    // DELETE post
     public function destroy($id)
     {
-        Post::destroy($id);
+        $post = Post::find($id);
+
+        if (!$post) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Post not found'
+            ], 404);
+        }
+
+        $post->delete();
 
         return response()->json([
             'status' => true,
