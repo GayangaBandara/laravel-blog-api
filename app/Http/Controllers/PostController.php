@@ -16,7 +16,18 @@ class PostController extends Controller
     // POST /api/posts
     public function store(Request $request)
     {
-        return Post::create($request->all());
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $post = Post::create($validated);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Post created successfully',
+            'data' => $post
+        ], 201);
     }
 
     // GET /api/posts/{id}
@@ -29,14 +40,29 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
-        $post->update($request->all());
-        return $post;
+
+        $validated = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'content' => 'sometimes|required|string',
+        ]);
+
+        $post->update($validated);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Post updated successfully',
+            'data' => $post
+        ]);
     }
 
     // DELETE /api/posts/{id}
     public function destroy($id)
     {
         Post::destroy($id);
-        return response()->json(['message' => 'Deleted']);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Post deleted successfully'
+        ]);
     }
 }
