@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,7 +14,7 @@ class PostController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Posts retrieved successfully',
-            'data' => Post::latest()->get()
+            'data' => PostResource::collection(Post::all())
         ]);
     }
 
@@ -30,7 +31,7 @@ class PostController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Post created successfully',
-            'data' => $post
+            'data' => new PostResource($post)
         ], 201);
     }
 
@@ -49,7 +50,7 @@ class PostController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Post retrieved successfully',
-            'data' => $post
+            'data' => new PostResource($post)
         ]);
     }
 
@@ -75,7 +76,7 @@ class PostController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Post updated successfully',
-            'data' => $post
+            'data' => new PostResource($post)
         ]);
     }
 
