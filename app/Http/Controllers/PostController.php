@@ -26,6 +26,8 @@ class PostController extends Controller
             'content' => 'required|string',
         ]);
 
+        $validated['user_id'] = 1; // Default user for now
+
         $post = Post::create($validated);
 
         return response()->json([
