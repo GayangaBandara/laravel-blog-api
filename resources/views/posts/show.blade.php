@@ -68,7 +68,7 @@
             <h1>{{ $post->title }}</h1>
             
             <div class="post-meta">
-                By <span class="author">{{ $post->user->name }}</span> • {{ $post->created_at->format('F d, Y') }}
+                By <span class="author">{{ $post->author }}</span> • {{ $post->created_at->format('F d, Y') }}
                 @if($post->created_at->notEqualTo($post->updated_at))
                     <span>(Updated: {{ $post->updated_at->format('F d, Y') }})</span>
                 @endif

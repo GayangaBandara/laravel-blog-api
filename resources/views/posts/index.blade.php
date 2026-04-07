@@ -80,7 +80,7 @@
                         <div class="post-card">
                             <h2 class="post-title">{{ $post->title }}</h2>
                             <div class="post-meta">
-                                By <strong>{{ $post->user->name }}</strong> • {{ $post->created_at->format('M d, Y') }}
+                                By <strong>{{ $post->author }}</strong> • {{ $post->created_at->format('M d, Y') }}
                             </div>
                             <p class="post-excerpt">{{ $post->content }}</p>
                         </div>

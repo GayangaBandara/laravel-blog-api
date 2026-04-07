@@ -24,9 +24,10 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'author' => 'required|string|max:255',
         ]);
 
-        $validated['user_id'] = 1; // Default user for now
+        $validated['user_id'] = 1;
 
         $post = Post::create($validated);
 
